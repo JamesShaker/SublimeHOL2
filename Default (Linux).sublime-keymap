@@ -1,0 +1,31 @@
+[
+	{ "keys": ["ctrl+,", "q", "h"], "command": "send_hol_repl", "args": {"scope": "selection", "prepend":";\nHOL_Interactive.toggle_quietdec();\n", "append":";\nHOL_Interactive.toggle_quietdec();\n"}},
+	{ "keys": ["ctrl+,", "q", "l"], "command": "send_hol_repl", "args": {"scope": "lines", "prepend":";\nHOL_Interactive.toggle_quietdec();\n", "append":";\nHOL_Interactive.toggle_quietdec();\n"}},
+
+	{ "keys": ["ctrl+,", "h"], "command": "send_hol_repl", "args": {"scope": "selection", "append":";\n"}},
+	{ "keys": ["ctrl+,", "g"], "command": "send_hol_repl", "args": {"scope": "selection", "prepend": ";\ng(", "append":");\n"}},
+	{ "keys": ["ctrl+,", "s", "g"], "command": "send_hol_repl", "args": {"scope": "selection", "prepend": ";\ne((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");\n"}},
+	{ "keys": ["ctrl+,", "s", "b"], "command": "send_hol_repl", "args": {"scope": "selection", "prepend": ";\ne(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");\n"}},
+	{ "keys": ["ctrl+,", "e"], "command": "send_hol_repl", "args": {"scope": "selection", "prepend": ";\ne(", "append":");\n"}},
+
+	{ "keys": ["ctrl+,", "l", "h"], "command": "send_hol_repl", "args": {"scope": "lines", "append":";\n"}},
+	{ "keys": ["ctrl+,", "l", "g"], "command": "send_hol_repl", "args": {"scope": "lines", "prepend": ";\ng(", "append":");\n"}},
+	{ "keys": ["ctrl+,", "l", "s", "g"], "command": "send_hol_repl", "args": {"scope": "lines", "prepend": ";\ne((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");\n"}},
+	{ "keys": ["ctrl+,", "l", "s", "b"], "command": "send_hol_repl", "args": {"scope": "lines", "prepend": ";\ne(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");\n"}},
+	{ "keys": ["ctrl+,", "l", "e"], "command": "send_hol_repl", "args": {"scope": "lines", "prepend": ";\ne(", "append":");\n"}},
+
+	{ "keys": ["ctrl+,", "t"], "command": "send_hol_repl", "args": {"scope": "file", "prepend":";\n", "append":";\n"}},
+
+	{ "keys": ["ctrl+,", "p"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\np();\n"}},
+	{ "keys": ["ctrl+,", "b"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nb();\n"}},
+	{ "keys": ["ctrl+,", "r"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nrestart();\n"}},
+	{ "keys": ["ctrl+,", "d"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\ndrop();\n"}},
+
+	{ "keys": ["ctrl+,", "f", "y"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nshow_types := (not (!show_types));\n"}},
+	{ "keys": ["ctrl+,", "f", "a"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nshow_assums := (not (!show_assums));\n"}},
+	{ "keys": ["ctrl+,", "f", "t"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nset_trace \"Goalstack.print_goal_at_top\" (1 - current_trace \"Goalstack.print_goal_at_top\");\n"}},
+	{ "keys": ["ctrl+,", "f", "f"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nset_trace \"Goalstack.print_goal_fvs\" (1 - current_trace \"Goalstack.print_goal_fvs\");\n"}},
+	{ "keys": ["ctrl+,", "f", "q"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend":";\nHOL_Interactive.toggle_quietdec();\n"}}
+
+]
+

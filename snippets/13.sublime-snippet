@@ -1,0 +1,5 @@
+<snippet>
+    <content><![CDATA[∉]]></content>
+    <tabTrigger>NOTIN</tabTrigger>
+    <scope>string.quoted.other.hol</scope>
+</snippet>

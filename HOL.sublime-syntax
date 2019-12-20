@@ -1,0 +1,236 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: HOL
+file_extensions:
+  - sml
+  - sig
+scope: source.hol
+
+variables:
+  identifier: \b[[:alpha:]_][[:alnum:]_]*\b
+  keyword: \b(EQUAL|GREATER|LESS|NONE|SOME|abstraction|abstype|and|andalso|array|as|before|bool|case|char|datatype|do|else|end|eqtype|exception|exn|false|fn|fun|functor|handle|if|in|include|infix|infixr|int|let|list|local|nil|nonfix|not|o|of|op|open|option|orelse|overload|print|raise|real|rec|ref|sharing|sig|signature|string|struct|structure|substring|then|true|type|unit|val|vector|where|while|with|withtype|word)\b
+
+contexts:
+  main:
+    # Strings begin and end with quotes, and use backslashes as an escape
+    # character
+    - match: '\bopen\b'
+      scope: keyword.control.import.hol
+
+    - match: '"'
+      scope: punctuation.definition.string.begin.hol
+      push: double_quoted_string
+
+    - match: '``'
+      push: double_term_ansi
+
+    - match: '`'
+      push: single_term_ansi
+
+    - match: '“'
+      push: double_term_unicode
+
+    - match: '‘'
+      push: single_term_unicode
+
+    # Comments begin with a '//' and finish at the end of the line
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
+
+    # Keywords are if, else for and while.
+    # Note that blackslashes don't need to be escaped within single quoted
+    # strings in YAML. When using single quoted strings, only single quotes
+    # need to be escaped: this is done by using two single quotes next to each
+    # other.
+    - match: '\b(if|else|for|while)\b'
+      scope: keyword.control.hol
+
+    # Numbers
+    - match: '\b(-)?[0-9.]+\b'
+      scope: constant.numeric.hol
+
+    # constants
+    - match: '\b(true|false)\b'
+      scope: constant.language.hol
+
+    # comparison operators
+    - match: '<\=|>\=|<|>|\!\=|\=|:='
+      scope: keyword.operator.assignment.hol
+
+    # arithmetic operators
+    - match: '\*|\+|-|\/|~|\^|\bdiv\b|\bmod\b|::|@|>>|>-|\bTHEN\b|\bTHEN1\b|\bTHENL\b|>\||\\'
+      scope: keyword.operator.arithmetic.hol
+
+    # logical operators
+    - match: '\b(orelse|andalso|not)\b'
+      scope: keyword.operator.logical.hol
+
+    # conditional
+    - match: '\b(if|then|else)\b'
+      scope: keyword.control.conditional.hol
+
+    # types
+    - match: '\b(int|real|bool|char|string)\b'
+      scope: storage.type.hol
+
+    # predefined functions
+    - match: '\b(real|floor|ceil|round|trunc|ord|str|hd|tl|explote|implode|null)\b'
+      scope: support.function.predefined.hol
+
+    - match: '->|list'
+      source: keyword.operator.constructor.hol
+
+    - match: '\bprint\b'
+      scope: support.function.builtin.hol
+
+    - match: '\b^fun\s'
+      scope: storage.type.function.hol
+
+    - match: '\bval\b'
+      scope: storage.type.hol
+
+    - match: '(?<=fun\s)(\b\w+\b)\s\b(\w+?)\s'
+      captures:
+        1: entity.name.function.hol
+        2: variable.parameter.hol
+
+    - match: '^Theorem\s*'
+      scope: keyword.other
+      push: theorem_name
+
+    - match: '^Definition\s*'
+      scope: variable.function
+      push: definition_name
+    
+    - match: '^(Inductive|CoInductive)\s*'
+      scope: entity.name
+      push: relation_name
+    
+    - match: '^Datatype:'
+      scope: constant.language
+      push: datatype_value
+    
+    - match: '^Type'
+      scope: constant.language
+
+    - match: '^Overload'
+      scope: variable.function
+
+  theorem_name:
+    - match : '\s*:'
+      scope: keyword.other
+      set: theorem_goal
+    - match : '\s'
+      pop: true
+  
+  theorem_goal:
+    - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
+    - match: '^Proof'
+      scope: keyword.other
+      set: theorem_tac
+
+  theorem_tac:
+    - include: main
+    - match: '^QED'
+      scope: keyword.other
+      pop: true
+
+  definition_name:
+    - match : '\s*:'
+      scope: variable.function
+      set: definition_value
+    - match : '\s'
+      pop: true
+
+  definition_value:
+    - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
+    - match: '^Termination'
+      scope: variable.function
+      set: definition_term_tac
+    - match: '^End'
+      scope: variable.function
+      pop: true
+
+  definition_term_tac:
+    - include: main
+    - match: '^End'
+      scope: variable.function
+      pop: true
+  
+  relation_name:
+    - match : '\s*:'
+      scope: entity.name
+      set: relation_value
+    - match : '\s'
+      pop: true
+  
+  relation_value:
+    - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
+    - match: '^End'
+      scope: entity.name
+      pop: true
+    
+  datatype_value:
+    - meta_scope: string.quoted.other.hol
+    - match: '^End'
+      scope: constant.language
+      pop: true
+
+  double_term_ansi:
+    - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
+    - match: '``'
+      pop: true
+
+  single_term_ansi:
+    - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
+    - match: '`'
+      pop: true
+
+  double_term_unicode:
+    - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
+    - match: '”'
+      pop: true
+
+  single_term_unicode:
+    - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
+    - match: '’'
+      pop: true
+
+  double_quoted_string:
+    - meta_scope: string.quoted.double.hol
+    - match: '\\.'
+      scope: constant.character.escape.hol
+    - match: '"'
+      scope: punctuation.definition.string.end.hol
+      pop: true
+
+  
+  comment:
+    - meta_scope: comment.line.hol
+    - match: '\*\)'
+      pop: true
+
+  

@@ -1,0 +1,5 @@
+<snippet>
+    <content><![CDATA[φ]]></content>
+    <tabTrigger>&apos;v</tabTrigger>
+    <scope>string.quoted.other.hol</scope>
+</snippet>
