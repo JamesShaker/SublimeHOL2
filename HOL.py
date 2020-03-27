@@ -112,6 +112,7 @@ class SendHolRepl(sublime_plugin.TextCommand):
         stripped_command = re.sub('\‘([\w\s\S]*?)\’','',stripped_command)
         stripped_command = re.sub('\"([\w\s\S]*?)\"','',stripped_command)
         stripped_command = re.sub('\(\*([\w\s\S]*?)\*\)','',stripped_command)
+        stripped_command = re.sub('Triviality[^:]*?:[\w\s\S]*?Proof','',stripped_command)
         stripped_command = re.sub('Theorem[^:]*?:[\w\s\S]*?Proof','',stripped_command)
         stripped_command = re.sub('Definition[^:]*?:[\w\s\S]*?Termination','',stripped_command)
         stripped_command = re.sub('Definition[^:]*?:[\w\s\S]*?End','',stripped_command)

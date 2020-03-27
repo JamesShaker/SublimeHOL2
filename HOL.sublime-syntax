@@ -100,6 +100,10 @@ contexts:
       scope: keyword.other
       push: theorem_name
 
+    - match: '^Triviality\s*'
+      scope: variable.language
+      push: triviality_name
+
     - match: '^Definition\s*'
       scope: variable.function
       push: definition_name
@@ -117,6 +121,28 @@ contexts:
 
     - match: '^Overload'
       scope: variable.function
+
+  triviality_name:
+    - match : '\s*:'
+      scope: variable.language
+      set: triviality_goal
+    - match : '\s'
+      pop: true
+
+  triviality_goal:
+    - meta_scope: string.quoted.other.hol
+    - match: '\(\*'
+      scope: punctuation.definition.comment.hol
+      push: comment
+    - match: '^Proof'
+      scope: variable.language
+      set: triviality_tac
+
+  triviality_tac:
+    - include: main
+    - match: '^QED'
+      scope: variable.language
+      pop: true
 
   theorem_name:
     - match : '\s*:'
