@@ -75,6 +75,20 @@
                         "caption": "HOL",
                         "children":
                         [
+                           {
+                               "command": "open_file", "args":
+                                {
+                                    "file": "${packages}/HOL/HOL.sublime-settings"
+                                },
+                                "caption": "Settings – Default"
+                            },
+                            {
+                                "command": "open_file", "args":
+                                {
+                                    "file": "${packages}/User/HOL.sublime-settings"
+                                },
+                                "caption": "Settings – User"
+                            },
                             {
                                 "command": "open_file",
                                 "args": {

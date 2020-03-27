@@ -3,6 +3,7 @@ import re
 import sublime
 import sublime_plugin
 import time
+import subprocess
 
 last_handle = None
 
@@ -14,11 +15,16 @@ class OpenHolRepl(sublime_plugin.WindowCommand):
     def run(self):
         script_path = os.path.join(sublime.packages_path(),"HOL/start_terminal.sh")
         filter_path = os.path.join(sublime.packages_path(),"HOL/filter")
-        try:
-            file_path   = os.path.dirname(self.window.active_view().file_name())
-        except Exception:
-            file_path   = "/"
-        self.window.run_command("terminus_open", args={"cmd":["sh",script_path,file_path,filter_path],"title":"HOL REPL","tag":"HOL",
+       	settings = sublime.load_settings("HOL.sublime-settings")
+        hol_path = settings.get("holpath")
+        if not hol_path:
+            sublime.error_message("Could not find HOL! Please setup in settings")
+        else:
+            try:
+                file_path   = os.path.dirname(self.window.active_view().file_name())
+            except Exception:
+                file_path   = "/"
+            self.window.run_command("terminus_open", args={"cmd":["sh",script_path,file_path,filter_path,hol_path],"title":"HOL REPL","tag":"HOL",
                                                        "post_view_hooks":[["set_hol_repl"]]})
 
 class SendHolRepl(sublime_plugin.TextCommand):
@@ -128,7 +134,7 @@ class SendHolRepl(sublime_plugin.TextCommand):
                 dep_string += 'load "' + dep + '";\n'
 
         #run final command
-        final_command = u"\x01" + dep_string + command + u"\x01"
+        final_command = u"\x00" + dep_string + command + u"\x00"
         self.view.window().run_command("terminus_send_string", args={"string": final_command,"tag":"HOL"})
 
     def selected_text(self):
