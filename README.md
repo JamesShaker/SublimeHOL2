@@ -19,7 +19,10 @@ Installation
 2. You must have Terminus installed (https://github.com/randy3k/Terminus)
 3. Clone this repository into your Packages folder and **rename it to HOL**
 4. Inside the newly renamed ``HOL`` repo you cloned, build ``filter.c`` with your
-favourite C compiler to an executable called ``filter`` in the same folder
+favourite C compiler to an executable called ``filter`` in the same folder. For example:
+```
+gcc filter.c -o filter
+```
 5. In the Sublime Text menu select ``Preferences -> Package Settings -> HOL -> Settings-User``
 6. In opened settings file enter:
     ```
@@ -27,6 +30,16 @@ favourite C compiler to an executable called ``filter`` in the same folder
         "holpath":"/your/path/to/binary/here/hol"
     }
     ```
+
+Updating
+--------
+1. In the plugin folder (should be called ``HOL``) in the  Sublime Text packages folder
+   run ``git pull``
+2. Recompile ``filter.c`` using you favourite C compiler to an executable called
+   ``filter``. For example:
+   ```
+   gcc filter.c -o filter
+   ```
 
 Features
 --------
