@@ -16,10 +16,10 @@
 
 	{ "keys": ["ctrl+,", "t"], "command": "send_hol_repl", "args": {"scope": "file", "prepend":";\n", "append":";\n"}},
 
-	{ "keys": ["ctrl+,", "p"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\np();\n"}},
-	{ "keys": ["ctrl+,", "b"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nb();\n"}},
-	{ "keys": ["ctrl+,", "r"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nrestart();\n"}},
-	{ "keys": ["ctrl+,", "d"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\ndrop();\n"}},
+	{ "keys": ["ctrl+,", "p"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nproofManagerLib.p();\n"}},
+	{ "keys": ["ctrl+,", "b"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nproofManagerLib.b();\n"}},
+	{ "keys": ["ctrl+,", "r"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nproofManagerLib.restart();\n"}},
+	{ "keys": ["ctrl+,", "d"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nproofManagerLib.drop();\n"}},
 
 	{ "keys": ["ctrl+,", "f", "y"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nshow_types := (not (!show_types));\n"}},
 	{ "keys": ["ctrl+,", "f", "a"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nshow_assums := (not (!show_assums));\n"}},

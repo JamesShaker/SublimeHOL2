@@ -41,10 +41,10 @@
                 {"caption": "REPL Control",
                  "children":
                     [
-                        { "caption":"Print Current Goal", "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\np();"}},
-                        { "caption":"Go Back", "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nb();"}},
-                        { "caption":"Restart Proof", "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nrestart();"}},
-                        { "caption":"Drop Proof", "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\ndrop();"}},
+                        { "caption":"Print Current Goal", "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nproofManagerLib.p();"}},
+                        { "caption":"Go Back", "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nproofManagerLib.b();"}},
+                        { "caption":"Restart Proof", "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nproofManagerLib.restart();"}},
+                        { "caption":"Drop Proof", "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nproofManagerLib.drop();"}},
                 ]},        
                 {"caption": "Toggle Flags On/Off",
                  "children":
