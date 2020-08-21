@@ -38,6 +38,13 @@
                         { "caption":"Sufficient Condition", "command": "send_hol_repl", "args": {"scope": "lines", "prepend": ";\ne(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");"}},
                         { "caption":"Tactic", "command": "send_hol_repl", "args": {"scope": "lines", "prepend": ";\ne(", "append":");"}}
                 ]},
+                {"caption": "Track in REPL",
+                 "children":
+                    [
+                        {"caption": "Find (Theorem Name)", "command": "find_hol_repl", "args": {}},
+                        {"caption": "Match (Term structure)", "command": "match_hol_repl", "args": {}}
+                    ]
+                },
                 {"caption": "REPL Control",
                  "children":
                     [

@@ -33,8 +33,6 @@ class SendHolRepl(sublime_plugin.TextCommand):
             lN,cN,text = self.selected_text()
         elif scope == "lines":
             lN,cN,text = self.selected_lines()
-        elif scope == "file":
-            lN,cN,text = self.selected_file()
         else:
             lN,cN,text = (0,0,"")
         #Delete things off front dependent on type of selection sent
@@ -158,3 +156,26 @@ class SendHolRepl(sublime_plugin.TextCommand):
         lN += 1
         return (lN,cN,"\n".join(parts))
 
+class FindHolRepl(sublime_plugin.TextCommand):
+    def run(self,edit):
+        self.view.window().show_input_panel("HOL DB Search String (e.g. EL_LENGTH)","",self.run_find,None,None)
+    def run_find(self,find_string):
+        if '"' in find_string:
+            sublime.error_message("Do not include the character '\"' in your HOL database search string.")
+        else:
+            self.view.run_command("send_hol_repl",args={"scope":"empty","prepend":'\n;DB.find "'+find_string+'";\n',"append":""})
+
+class MatchHolRepl(sublime_plugin.TextCommand):
+    def run(self,edit):
+        self.view.window().show_input_panel("HOL DB Theories to Search (Empty for all or e.g. \"arithmetic\",\"boolTheory\")","",self.step1,None,None)
+    def step1(self,theory_string):
+        if theory_string.count('"')%2 != 0:
+            sublime.error_message('Should have even number of \" around theory names!')
+        else:
+            self.theory_string = theory_string
+            self.view.window().show_input_panel("HOL DB Match String (e.g. a = b ==> b = a)","",self.run_match,None,None)
+    def run_match(self,find_string):
+        if "`" in find_string or "‘" in find_string or "’" in find_string or "“" in find_string or "”" in find_string: 
+            sublime.error_message("Do not include any quotation or term marking ASCII or Unicode characters in your HOL database match term.")
+        else:
+            self.view.run_command("send_hol_repl",args={"scope":"empty","prepend":'\n;DB.match ['+self.theory_string+'] ``'+find_string+'``;\n',"append":""})

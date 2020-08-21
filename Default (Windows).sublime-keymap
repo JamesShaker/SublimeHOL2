@@ -1,4 +1,7 @@
 [
+	{ "keys": ["ctrl+,", "t", "f"], "command": "find_hol_repl", "args": {}},
+	{ "keys": ["ctrl+,", "t", "m"], "command": "match_hol_repl", "args": {}},
+
 	{ "keys": ["ctrl+,", "q", "h"], "command": "send_hol_repl", "args": {"scope": "selection", "prepend":";\nHOL_Interactive.toggle_quietdec();\n", "append":";\nHOL_Interactive.toggle_quietdec();\n"}},
 	{ "keys": ["ctrl+,", "q", "l"], "command": "send_hol_repl", "args": {"scope": "lines", "prepend":";\nHOL_Interactive.toggle_quietdec();\n", "append":";\nHOL_Interactive.toggle_quietdec();\n"}},
 
@@ -13,8 +16,6 @@
 	{ "keys": ["ctrl+,", "l", "s", "g"], "command": "send_hol_repl", "args": {"scope": "lines", "prepend": ";\ne((fn q => BasicProvers.byA(q,ALL_TAC)) ", "append":");\n"}},
 	{ "keys": ["ctrl+,", "l", "s", "b"], "command": "send_hol_repl", "args": {"scope": "lines", "prepend": ";\ne(Tactical.Q_TAC Tactic.SUFF_TAC ", "append":");\n"}},
 	{ "keys": ["ctrl+,", "l", "e"], "command": "send_hol_repl", "args": {"scope": "lines", "prepend": ";\ne(", "append":");\n"}},
-
-	{ "keys": ["ctrl+,", "t"], "command": "send_hol_repl", "args": {"scope": "file", "prepend":";\n", "append":";\n"}},
 
 	{ "keys": ["ctrl+,", "p"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nproofManagerLib.p();\n"}},
 	{ "keys": ["ctrl+,", "b"], "command": "send_hol_repl", "args": {"scope": "empty", "prepend": ";\nproofManagerLib.b();\n"}},
