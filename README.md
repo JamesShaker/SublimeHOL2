@@ -1,5 +1,6 @@
-HOL for Sublime Text (2nd Edition)
+HOL for Sublime Text (2nd Edition) (UNMAINTAINED)
 =====================================
+**Please note this plugin is unmaintained.**
 
 A HOL ITP (https://hol-theorem-prover.org/) development environment.
 Some parts taken from SML-syntax (https://github.com/Takaia/SML-syntax).
